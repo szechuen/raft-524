@@ -6,6 +6,7 @@ server {
 
   server_join {
     retry_join = [{%- for host in JOIN.split(' ') %}"{{ host }}",{%- endfor %}]
+    retry_interval = "3s"
   }
 }
 
