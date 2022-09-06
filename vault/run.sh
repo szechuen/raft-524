@@ -30,8 +30,8 @@ then
   ip route save > routes
   ip route flush all
 
-  echo "Sleeping for 30 seconds to allow cluster to stabilize before reconnecting node..."
-  sleep 30
+  echo "Sleeping for 60 seconds to allow cluster to diverge before reconnecting node..."
+  sleep 60
 
   echo "Reconnecting node..."
   ip route restore < routes
