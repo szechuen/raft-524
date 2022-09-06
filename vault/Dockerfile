@@ -10,7 +10,7 @@ WORKDIR /tmp
 
 RUN curl -O https://releases.hashicorp.com/vault/${VERSION}/vault_${VERSION}_linux_${TARGETARCH}.zip
 RUN unzip vault_${VERSION}_linux_${TARGETARCH}.zip
-RUN mv vault /usr/bin/vault
+RUN mv vault /usr/bin/
 
 WORKDIR /run
 

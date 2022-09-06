@@ -1,0 +1,39 @@
+services:
+  node0:
+    hostname: node0
+    build:
+      context: .
+      args: [VERSION]
+    cap_add: [NET_ADMIN]
+    volumes: ["${NOMAD_LICENSE_PATH:-/dev/null}:/run/license"]
+    ports: ["4650:4646"]
+    environment:
+      VERSION: ${VERSION}
+      JOIN: node1 node2
+      DISCONNECT: "true"
+
+  node1:
+    hostname: node1
+    build:
+      context: .
+      args: [VERSION]
+    cap_add: [NET_ADMIN]
+    volumes: ["${NOMAD_LICENSE_PATH:-/dev/null}:/run/license"]
+    ports: ["4651:4646"]
+    environment:
+      VERSION: ${VERSION}
+      JOIN: node0 node2
+      DISCONNECT: "false"
+
+  node2:
+    hostname: node2
+    build:
+      context: .
+      args: [VERSION]
+    cap_add: [NET_ADMIN]
+    volumes: ["${NOMAD_LICENSE_PATH:-/dev/null}:/run/license"]
+    ports: ["4652:4646"]
+    environment:
+      VERSION: ${VERSION}
+      JOIN: node0 node1
+      DISCONNECT: "false"

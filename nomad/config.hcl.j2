@@ -1,0 +1,14 @@
+data_dir = "/run"
+
+server {
+  enabled = true
+  bootstrap_expect = {{ JOIN.split(' ')|length + 1 }}
+
+  server_join {
+    retry_join = [{%- for host in JOIN.split(' ') %}"{{ host }}",{%- endfor %}]
+  }
+}
+
+{%- if '+ent' in VERSION %}
+license_path = "/run/license"
+{%- endif %}
