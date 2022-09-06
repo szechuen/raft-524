@@ -1,0 +1,9 @@
+server = true
+
+client_addr = "[::]"
+data_dir = "/run"
+
+retry_join = [{%- for host in JOIN.split(' ') %}"{{ host }}",{%- endfor %}]
+bootstrap = {{ BOOTSTRAP }}
+
+license_path = "/run/license"

@@ -1,0 +1,39 @@
+services:
+  node0:
+    hostname: node0
+    build:
+      context: .
+      args: [VERSION]
+    cap_add: [NET_ADMIN]
+    volumes: ["${VAULT_LICENSE_PATH:-/dev/null}:/run/license"]
+    ports: ["8210:8200"]
+    environment:
+      JOIN: node1 node2
+      INIT: "true"
+      DISCONNECT: "true"
+
+  node1:
+    hostname: node1
+    build:
+      context: .
+      args: [VERSION]
+    cap_add: [NET_ADMIN]
+    volumes: ["${VAULT_LICENSE_PATH:-/dev/null}:/run/license"]
+    ports: ["8211:8200"]
+    environment:
+      JOIN: node0 node2
+      INIT: "false"
+      DISCONNECT: "false"
+
+  node2:
+    hostname: node2
+    build:
+      context: .
+      args: [VERSION]
+    cap_add: [NET_ADMIN]
+    volumes: ["${VAULT_LICENSE_PATH:-/dev/null}:/run/license"]
+    ports: ["8212:8200"]
+    environment:
+      JOIN: node0 node1
+      INIT: "false"
+      DISCONNECT: "false"

@@ -1,0 +1,39 @@
+services:
+  node0:
+    hostname: node0
+    build:
+      context: .
+      args: [VERSION]
+    cap_add: [NET_ADMIN]
+    volumes: ["${CONSUL_LICENSE_PATH:-/dev/null}:/run/license"]
+    ports: ["8510:8500"]
+    environment:
+      JOIN: node1 node2
+      BOOTSTRAP: "true"
+      DISCONNECT: "true"
+
+  node1:
+    hostname: node1
+    build:
+      context: .
+      args: [VERSION]
+    cap_add: [NET_ADMIN]
+    volumes: ["${CONSUL_LICENSE_PATH:-/dev/null}:/run/license"]
+    ports: ["8511:8500"]
+    environment:
+      JOIN: node0 node2
+      BOOTSTRAP: "false"
+      DISCONNECT: "false"
+
+  node2:
+    hostname: node2
+    build:
+      context: .
+      args: [VERSION]
+    cap_add: [NET_ADMIN]
+    volumes: ["${CONSUL_LICENSE_PATH:-/dev/null}:/run/license"]
+    ports: ["8512:8500"]
+    environment:
+      JOIN: node0 node1
+      BOOTSTRAP: "false"
+      DISCONNECT: "false"
