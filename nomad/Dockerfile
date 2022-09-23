@@ -12,6 +12,8 @@ RUN curl -O https://releases.hashicorp.com/nomad/${VERSION}/nomad_${VERSION}_lin
 RUN unzip nomad_${VERSION}_linux_${TARGETARCH}.zip
 RUN mv nomad /usr/bin/
 
+# COPY nomad /usr/bin/
+
 WORKDIR /run
 
 COPY config.hcl.j2 ./

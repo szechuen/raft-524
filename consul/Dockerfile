@@ -12,6 +12,8 @@ RUN curl -O https://releases.hashicorp.com/consul/${VERSION}/consul_${VERSION}_l
 RUN unzip consul_${VERSION}_linux_${TARGETARCH}.zip
 RUN mv consul /usr/bin/
 
+# COPY consul /usr/bin/
+
 WORKDIR /run
 
 COPY config.hcl.j2 ./

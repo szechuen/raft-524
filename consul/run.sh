@@ -6,8 +6,8 @@ consul agent -config-file config.hcl &
 
 if [ ${DISCONNECT} == "true" ]
 then
-  echo "Sleeping for 30 seconds to allow cluster to stabilize before disconnecting node..."
-  sleep 30
+  echo "Sleeping for 60 seconds to allow cluster to stabilize before disconnecting node..."
+  sleep 60
 
   echo "Disconnecting node..."
   ip route save > routes

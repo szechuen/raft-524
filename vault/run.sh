@@ -17,14 +17,12 @@ then
   do
     until vault operator unseal -address http://${host}:8200 $(< .vault-unseal); do :; done
   done
-else
-  sleep 15
 fi
 
 if [ ${DISCONNECT} == "true" ]
 then
-  echo "Sleeping for 30 seconds to allow cluster to stabilize before disconnecting node..."
-  sleep 30
+  echo "Sleeping for 60 seconds to allow cluster to stabilize before disconnecting node..."
+  sleep 60
 
   echo "Disconnecting node..."
   ip route save > routes

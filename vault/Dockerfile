@@ -12,6 +12,8 @@ RUN curl -O https://releases.hashicorp.com/vault/${VERSION}/vault_${VERSION}_lin
 RUN unzip vault_${VERSION}_linux_${TARGETARCH}.zip
 RUN mv vault /usr/bin/
 
+# COPY vault /usr/bin/
+
 WORKDIR /run
 
 COPY config.hcl.j2 ./
